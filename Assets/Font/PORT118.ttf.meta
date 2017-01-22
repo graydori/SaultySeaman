@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0bd83220a6ac157419355e50d999a1a5
+timeCreated: 1485115118
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: PORT118
+  fontNames:
+  - PORT118
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

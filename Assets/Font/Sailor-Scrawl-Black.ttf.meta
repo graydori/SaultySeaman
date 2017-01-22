@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0a99cf9f5ec1f494b8f3060447a78fc7
+timeCreated: 1485113115
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sailor Scrawl Black
+  fontNames:
+  - Sailor Scrawl Black
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
