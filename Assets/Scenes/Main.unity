@@ -391,9 +391,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0ad1dcd2b259f4cb4b95bade515899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _UpDown: 0.01
-  _Angle: 3.11
-  _Period: 0.53
+  _UpDown: 0.001
+  _Angle: 0.3
+  _Period: 0.8
 --- !u!4 &1052286551
 Transform:
   m_ObjectHideFlags: 0
@@ -869,19 +869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb58b9fda75a944ba3e9ddfaa9c16c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rmsValue: 0
-  dbValue: 0
-  pitchValue: 0
-  qSamples: 1024
-  binSize: 1024
-  refValue: 0.1
-  threshold: 0.01
-  samples: []
-  spectrum: []
-  samplerate: 0
-  display: {fileID: 0}
-  mute: 1
-  masterMixer: {fileID: 24100000, guid: ea3075824fc585548abc02d2ba731d6b, type: 2}
 --- !u!82 &2082541792
 AudioSource:
   m_ObjectHideFlags: 0
