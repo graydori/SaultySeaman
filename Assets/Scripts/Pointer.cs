@@ -8,7 +8,8 @@ public class Pointer : MonoBehaviour {
     public float speed = 1;
     public Vector3 position;
     public Tracker tracker;
-    public float maxPitch = 150;
+    public float currentTrackedPitch;
+    public float pitchToYAxisFactor = 150;   
     private float centerY = 0;
     public float maxSize = 100;
 
@@ -26,10 +27,11 @@ public class Pointer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        currentTrackedPitch = tracker.pitch;
         float y;
         if (!fake)
         {
-            y = tracker.pitch / maxPitch;
+            y = tracker.pitch / pitchToYAxisFactor;
             y *= maxSize;
             y -= maxSize / 2;
             y += centerY;
@@ -38,6 +40,7 @@ public class Pointer : MonoBehaviour {
             UpdateOpacity();
 
         } else {
+            // Fake input for developer use so we don't have to sing all the time. 
             y = Mathf.Clamp( gameObject.transform.position.y + Input.GetAxis("Vertical") * speed,  centerY - maxSize / 2, centerY + maxSize /2 );
         }
         position = new Vector3(gameObject.transform.position.x , y, gameObject.transform.position.z);
