@@ -8,11 +8,21 @@ public class MoveNextOnSpace : MonoBehaviour {
 
     private void MoveNext()
     {
-        Application.LoadLevel(Application.loadedLevel + 1);
+        if (Application.loadedLevel < 2)
+            Application.LoadLevel(Application.loadedLevel + 1);
+        else
+            Application.LoadLevel(0);
     }
 
     // Update is called once per frame
     void Update () {
-        if (Track != null && Track.pitch > 0 || Track == null && Input.GetKeyDown(KeyCode.Space)) MoveNext(); 
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+        
+        if (Track != null && Track.pitch > 0 || Track == null && Input.GetKeyDown(KeyCode.Space)) MoveNext();
+
+
     }
 }

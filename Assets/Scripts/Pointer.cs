@@ -34,6 +34,11 @@ public class Pointer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+
         float y;
         if (!fake)
         {
