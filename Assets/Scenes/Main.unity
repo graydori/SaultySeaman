@@ -421,11 +421,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 933378257}
   spawn: {fileID: 1480254456650234, guid: e33aafb5750a97347abdce605096e3f2, type: 2}
+  useLevelTwoNotes: 0
   maxCount: 20
   horizontalMax: 14
   horizontalMin: -10
   speed: 2
-  frequencyOfSpawn: 0.02
+  frequencyOfSpawn: 0.036
   horizontalEasy: 0.5
   verticalEasy: 0.85
   success: 0
@@ -576,6 +577,16 @@ Prefab:
         type: 2}
       propertyPath: fake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114056483765917030, guid: 90c72f4e4a1494d4683d013fe06d4873,
+        type: 2}
+      propertyPath: maxPitch
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 114056483765917030, guid: 90c72f4e4a1494d4683d013fe06d4873,
+        type: 2}
+      propertyPath: maxSize
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90c72f4e4a1494d4683d013fe06d4873, type: 2}

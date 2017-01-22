@@ -8,7 +8,7 @@ public class SongGenerator
 
     /* 
       
-     The song generation algorithm was designed by Michael Fraser from Tree of Audio
+     Thanks to Michael Fraser for help with this!
 
     We pick notes that will go with the music. The music is in the key of G.
     We want  both a soprano and a baritone to be able to hit all the notes. 
@@ -17,39 +17,32 @@ public class SongGenerator
     So: C4 262 to F4 349.
     Since we don't need people to sing -well- we use a somewhat wider range that that.
 
-
-    For the first level:
-    Group 1: (B3 = 246.94, D4 = 293.66)
-    Group 2: (C4 = 261.63)
-
-    For the second level:
-    add G4 = 392 to the Group 1
-    add  E4 = 329.63 and FSharp4 = 369.99 to Group 2
-
-    Notes are picked from Group 1 2/3 of the time. It's ok for the same note in Group A to follow itself
-    Notes are picked from Group 2 1/3 of the time. It's not ok for the same note in Group B to follow itself
+    Notes are picked from Group 1 2/3 of the time. It's ok for the same note in Group 1 to follow itself
+    Notes are picked from Group 2 1/3 of the time. It's not ok for the same note in Group 2 to follow itself
 */
 
-    private const float B3 = 246.9f; 
-    private const float D4 = 293.6f; 
-    private const float C4 = 261.6f; 
-    private const float G4 = 392.0f; 
-    private const float E4 = 329.6f; 
+    private const float B3 = 246.9f;
+    private const float C4 = 261.6f;
+    private const float D4 = 293.6f;
+    private const float E4 = 329.6f;
     private const float FSharp4 = 370.0f;
+    private const float G4 = 392.0f; 
     float previousNote = 0.0f;
-
-    //private float[,] levelOneNoteGroups = { { B3, D4 }, { C4 } };
-    // private float[,] levelTwoNoteGroups = { { B3, D4, G4 }, { C4, E4, FSharp4 } };
-
+    
     private float[][] levelOneNoteGroups = new float[][] 
     {
-        new float[] { B3, D4 },
-        new float[]  { C4 }
+        new float[] { B3, D4 }, // Group 1
+        new float[]  { C4, E4 }  // Group 2
+    };
+
+    private float[][] levelTwoNoteGroups = new float[][] 
+    {
+        new float[] { B3, D4, G4 },
+        new float[]  { C4, E4, FSharp4 }
     };
 
 
-
-    public float PickANote()
+    public float PickANote(bool useLevelTwoNotes = false)
     {
         float note;
         bool success;
@@ -69,7 +62,15 @@ public class SongGenerator
                 groupIndex = 0;
             }
 
-            float[] noteGroup = levelOneNoteGroups[groupIndex];
+            float[] noteGroup;
+            if (useLevelTwoNotes)
+            {
+                noteGroup = levelTwoNoteGroups[groupIndex];
+            }
+            else
+            {
+                noteGroup = levelOneNoteGroups[groupIndex];
+            }
             int noteIndex = random.Next(noteGroup.Length);
             note = noteGroup[noteIndex];
 

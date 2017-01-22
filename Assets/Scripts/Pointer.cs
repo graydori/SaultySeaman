@@ -10,8 +10,9 @@ public class Pointer : MonoBehaviour
     public Vector3 position;
     public Tracker tracker;
     private float centerY = 0;
-    public float maxSize = 100;
-    public float maxPitch = 700;
+    public float maxSize = 100; // note this may be overriden in the Unity property inspector
+    public float minPitch = 175; // note this may be overriden in the Unity property inspector
+    public float maxPitch = 450; // note this may be overriden in the Unity property inspector
     public float pointerPitch = 0;
 
     public bool isActive = false;
@@ -71,7 +72,7 @@ public class Pointer : MonoBehaviour
     public float MapPitchToYAxis(float pitch)
     {
         float y;
-        y = pitch / maxPitch;
+        y = (pitch - minPitch)/ (maxPitch - minPitch);
         y *= maxSize;
         y -= maxSize / 2;
         y += centerY;
