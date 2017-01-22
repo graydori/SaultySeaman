@@ -12,6 +12,8 @@ public class Pointer : MonoBehaviour {
     public float pitchToYAxisFactor = 150;   
     private float centerY = 0;
     public float maxSize = 100;
+    public float maxTrackedPitch = 0;
+    public float minTrackedPitch = 99999;
 
     public bool isActive = false;
 
@@ -28,14 +30,25 @@ public class Pointer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         currentTrackedPitch = tracker.pitch;
+
+        if (currentTrackedPitch > maxTrackedPitch)
+        {
+            maxTrackedPitch = currentTrackedPitch;
+        }
+        if ((currentTrackedPitch > 0) && (currentTrackedPitch < minTrackedPitch))
+        {
+            minTrackedPitch = currentTrackedPitch;
+        }
+
+
         float y;
         if (!fake)
         {
-            y = tracker.pitch / pitchToYAxisFactor;
+            y = currentTrackedPitch / pitchToYAxisFactor;
             y *= maxSize;
             y -= maxSize / 2;
             y += centerY;
-            isActive = tracker.pitch != 0;
+            isActive = currentTrackedPitch != 0;
            
             UpdateOpacity();
 
