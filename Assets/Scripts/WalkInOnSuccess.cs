@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class WalkInOnSuccess : MonoBehaviour
 {
-
-    public SpawnPitch pitch;
+    
     public Animator animate;
     public int successMin;
     public int successMax;
@@ -20,7 +19,7 @@ public class WalkInOnSuccess : MonoBehaviour
     void Update()
     {
         Vector3 dest = movingToPosOne ? position1 : position2;
-        if (pitch.success >= successMin && pitch.success < successMax)
+        if (UserState.success >= successMin && UserState.success < successMax)
         {
             transform.position = Vector3.SmoothDamp(
                 transform.position,

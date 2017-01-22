@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PositionOnSuccess : MonoBehaviour {
-
-    public SpawnPitch pitch;
+    
     public int successMax;
     public float dest;
     private Vector3 start;
@@ -22,14 +21,23 @@ public class PositionOnSuccess : MonoBehaviour {
     // Update is called once per frame
  
 	void Update () {
-        if (pitch.success < successMax)
+        if (UserState.success < successMax)
         {
-            float amountOfSuccess = (float)pitch.success / successMax;
+            float amountOfSuccess = (float)UserState.success / successMax;
             var destPost = start + new Vector3(0, amountOfSuccess * distance);
             transform.position = transform.position = Vector3.SmoothDamp(
                 transform.position,
                 destPost,
                 ref velocity, smoothTime);
+        } else
+        {
+            StartCoroutine(MoveNext());
         }
 	}
+
+    IEnumerator MoveNext()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        Application.LoadLevel(Application.loadedLevel + 1);
+    }
 }

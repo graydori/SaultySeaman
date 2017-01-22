@@ -3,6 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+
+public static class UserState {
+    public static int success;
+    public static int misses;
+    public static void init()
+    {
+        success = 0;
+        misses = 0;
+    }
+}
+
 public class SpawnPitch : MonoBehaviour
 {
 
@@ -32,8 +43,7 @@ public class SpawnPitch : MonoBehaviour
     public float horizontalEasy = 0.5f;
     public float verticalEasy = 0.5f;
 
-    public int success = 0;
-    public int misses = 0;
+    
 
     private List<Spawn> spawns;
     public Text display;
@@ -48,6 +58,7 @@ public class SpawnPitch : MonoBehaviour
     void Start()
     {
         spawns = new List<Spawn>();
+        UserState.init();
         UpdateDisplay();
     }
 
@@ -74,7 +85,7 @@ public class SpawnPitch : MonoBehaviour
                     pointer.GetComponent<Animator>().SetTrigger("Hit");
                     n.gameObject.GetComponent<Animator>().SetBool("Dead", true);
                     //n.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
-                    success++;
+                    UserState.success++;
                 }
             }
             else
@@ -91,7 +102,7 @@ public class SpawnPitch : MonoBehaviour
             
             if (n.gameObject.transform.position.x < horizontalMin)
             {
-                misses++;
+                UserState.misses++;
                 Destroy(n.gameObject);
                 removeMe.Add(n);
             }
@@ -108,8 +119,7 @@ public class SpawnPitch : MonoBehaviour
     {
         if (display != null)
         {
-            display.text = "Notes Hit: " + success + "\n" +
-                "Missed: " + misses;
+            display.text = "Sailors seduced : " + UserState.success / 4 ;
         }
     }
      
