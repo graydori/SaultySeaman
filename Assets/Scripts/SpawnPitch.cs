@@ -86,7 +86,7 @@ public class SpawnPitch : MonoBehaviour
     {
         bool withinMax = spawns.Count < maxCount;
         float randomNumber = Random.Range(0f, 1f);
-        bool shouldSpawn = randomNumber < frequencyOfSpawn * (1 / (spawns.Count + 1) );
+        bool shouldSpawn = randomNumber < frequencyOfSpawn;
 
         if (withinMax && shouldSpawn)
         {
