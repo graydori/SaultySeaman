@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\Pitch\PitchTracker.cs" />
      <Compile Include="Assets\Scripts\Pointer.cs" />
      <Compile Include="Assets\Scripts\ShipRotator.cs" />
+     <Compile Include="Assets\Scripts\SongGenerator.cs" />
      <Compile Include="Assets\Scripts\SpawnPitch.cs" />
      <Compile Include="Assets\Scripts\Tracker.cs" />
  <Reference Include="UnityEngine.UI">

@@ -17,12 +17,11 @@ public class SpawnPitch : MonoBehaviour
     public GameObject spawn;
 
     public int maxCount = 20;
-    
+
     public float horizontalMax = 14f;
     public float horizontalMin = -10f;
     public float speed = 1.5f;
-    public float verticalMin = 1.5f;
-    public float verticalMax = 4.5f;
+
 
     //How often we spawn
     public float frequencyOfSpawn = 0.02f;
@@ -36,6 +35,11 @@ public class SpawnPitch : MonoBehaviour
 
     private List<Spawn> spawns;
     public Text display;
+
+    // Pitch related stuff
+    public float verticalMin = 1.5f;
+    public float verticalMax = 4.5f;
+    private SongGenerator songGenerator = new SongGenerator();
 
     void Start()
     {
@@ -107,9 +111,9 @@ public class SpawnPitch : MonoBehaviour
      
     float GenerateNoteFrequency()
     {
-        float f = Random.Range(verticalMin, verticalMax);
-        Debug.Log("verticalMin, verticalMax " + verticalMin + " " + verticalMax);
+        float f = Random.Range(verticalMin, verticalMax); // 1.5,4.5
         Debug.Log("GenerateNoteFrequency f = " + f);
+        Debug.Log("PickANote = " + songGenerator.PickANote());
         return f;
     }
     void PerformSpawn()

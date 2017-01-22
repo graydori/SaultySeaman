@@ -343,14 +343,14 @@ MonoBehaviour:
   horizontalMax: 14
   horizontalMin: -10
   speed: 2
-  verticalMin: 1.5
-  verticalMax: 4.5
   frequencyOfSpawn: 0.02
   horizontalEasy: 0.5
   verticalEasy: 0.85
   success: 0
   misses: 0
   display: {fileID: 1875919312}
+  verticalMin: 1.5
+  verticalMax: 4.5
 --- !u!4 &716670138
 Transform:
   m_ObjectHideFlags: 0
@@ -1132,4 +1132,4 @@ MonoBehaviour:
   midiCents: 0
   display: {fileID: 0}
   mute: 1
-  masterMixer: {fileID: 24100000, guid: ea3075824fc585548abc02d2ba731d6b, type: 2}
+  masterMixer: {fileID: 24100000, guid: f9e327c0500adb943993d0b1d99fad30, type: 2}
