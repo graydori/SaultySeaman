@@ -119,7 +119,8 @@ public class SpawnPitch : MonoBehaviour
     {
         if (display != null)
         {
-            display.text = "Sailors seduced : " + UserState.success / 4 ;
+            // no time to set the number properly. should match Success Max in inspector for  positionOnSuccess.successMax;
+            display.text = "Sailors seduced : " + UserState.success / 4 + " of 12"; 
         }
     }
      
