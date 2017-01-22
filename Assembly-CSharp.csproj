@@ -46,16 +46,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\FlashingTextScript.cs" />
+     <Compile Include="Assets\Scripts\MoveNextOnSpace.cs" />
      <Compile Include="Assets\Scripts\Pitch\CircularBuffer.cs" />
      <Compile Include="Assets\Scripts\Pitch\Extensions.cs" />
      <Compile Include="Assets\Scripts\Pitch\IIRFilter.cs" />
      <Compile Include="Assets\Scripts\Pitch\PitchDsp.cs" />
      <Compile Include="Assets\Scripts\Pitch\PitchTracker.cs" />
      <Compile Include="Assets\Scripts\Pointer.cs" />
+     <Compile Include="Assets\Scripts\PositionOnSuccess.cs" />
+     <Compile Include="Assets\Scripts\ScoreCalc.cs" />
      <Compile Include="Assets\Scripts\ShipRotator.cs" />
      <Compile Include="Assets\Scripts\SongGenerator.cs" />
      <Compile Include="Assets\Scripts\SpawnPitch.cs" />
      <Compile Include="Assets\Scripts\Tracker.cs" />
+     <Compile Include="Assets\Scripts\UpdateAnimation.cs" />
+     <Compile Include="Assets\Scripts\UpdateOnSuccess.cs" />
+     <Compile Include="Assets\Scripts\WalkInOnSuccess.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

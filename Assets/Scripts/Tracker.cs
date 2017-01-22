@@ -47,9 +47,11 @@ public class Tracker : MonoBehaviour
     void ForumVersionStart()
     {
 
-        int minSampleRate;
-        Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out micSampleRate);
-        Debug.Log("Recording from default mic at " + micSampleRate + " Hz");
+        int minSampleRate, maxSampleRate;
+        Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out maxSampleRate);
+        Debug.Log("Recording from default mic at " + minSampleRate + " Hz");
+        Debug.Log("Minimum sample rate was: " + minSampleRate + " Hz");
+        Debug.Log("Maximum sample rate was: " + maxSampleRate + " Hz");
 
         // starts the Microphone and attaches it to the AudioSource
         GetComponent<AudioSource>().clip = Microphone.Start(micDeviceName, true, 10, micSampleRate);

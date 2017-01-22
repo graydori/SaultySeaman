@@ -140,7 +140,7 @@ public class SpawnPitch : MonoBehaviour
 
         if ((Time.timeSinceLevelLoad - timeOfLastSpawn) < 0.1)
         {
-            Debug.Log("Avoiding spawning really close together");
+            //Debug.Log("Avoiding spawning really close together");
             shouldSpawn = false;
         }
 

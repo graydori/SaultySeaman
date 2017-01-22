@@ -2,6 +2,9 @@
 Library/
 Temp/
 obj/
+SaltySeamen_Data
+SaltySeamen.exe
+SaltySeamen.zip
 
 # Windows image file caches
 Thumbs.db
