@@ -104,7 +104,14 @@ public class SpawnPitch : MonoBehaviour
                 "Missed: " + misses;
         }
     }
-
+     
+    float GenerateNoteFrequency()
+    {
+        float f = Random.Range(verticalMin, verticalMax);
+        Debug.Log("verticalMin, verticalMax " + verticalMin + " " + verticalMax);
+        Debug.Log("GenerateNoteFrequency f = " + f);
+        return f;
+    }
     void PerformSpawn()
     {
         bool withinMax = spawns.Count < maxCount;
@@ -114,7 +121,7 @@ public class SpawnPitch : MonoBehaviour
         if (withinMax && shouldSpawn)
         {
             Spawn n = new Spawn();
-            n.postion = new Vector2(horizontalMax, Random.Range(verticalMin, verticalMax));
+            n.postion = new Vector2(horizontalMax, GenerateNoteFrequency());
             n.gameObject = Instantiate(spawn, n.postion, spawn.transform.rotation);
             spawns.Add(n);
         }
