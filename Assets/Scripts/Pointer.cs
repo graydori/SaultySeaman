@@ -31,7 +31,7 @@ public class Pointer : MonoBehaviour {
         } else {
             y = Mathf.Clamp( gameObject.transform.position.y + Input.GetAxis("Vertical") * speed,  centerY - maxSize / 2, centerY + maxSize /2 );
         }
-        position = new Vector3(gameObject.transform.position.x , y);
+        position = new Vector3(gameObject.transform.position.x , y, gameObject.transform.position.z);
         gameObject.transform.position = position;
 	}
 
