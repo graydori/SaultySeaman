@@ -9,13 +9,14 @@ public class SpawnPitch : MonoBehaviour
     class Spawn
     {
         public GameObject gameObject;
-        public Vector2 postion;
+        public Vector2 position;
         public bool hit;
         public float noteFrequency;
     }
 
     public Pointer pointer;
     public GameObject spawn;
+    public bool useLevelTwoNotes;
 
     public int maxCount = 20;
 
@@ -25,7 +26,7 @@ public class SpawnPitch : MonoBehaviour
 
 
     //How often we spawn
-    public float frequencyOfSpawn = 0.02f;
+    public float frequencyOfSpawn = 0.036f;
 
     //Modifiers how easy something is
     public float horizontalEasy = 0.5f;
@@ -41,6 +42,8 @@ public class SpawnPitch : MonoBehaviour
     public float verticalMin = 1.5f;
     public float verticalMax = 4.5f;
     private SongGenerator songGenerator = new SongGenerator();
+
+    private float timeOfLastSpawn;
 
     void Start()
     {
@@ -114,22 +117,31 @@ public class SpawnPitch : MonoBehaviour
     {
         Debug.Log("PlaceSpawnVertically noteFrequency = " + noteFrequency);
 
-        float f = Random.Range(verticalMin, verticalMax); // 1.5,4.5        
-        return f;
+        // float y = Random.Range(verticalMin, verticalMax); // 1.5,4.5        
+        float y = pointer.MapPitchToYAxis(noteFrequency);
+        return y;
     }
     void PerformSpawn()
     {
         bool withinMax = spawns.Count < maxCount;
         float randomNumber = Random.Range(0f, 1f);
+        
         bool shouldSpawn = randomNumber < frequencyOfSpawn;
+
+        if ((Time.timeSinceLevelLoad - timeOfLastSpawn) < 0.1)
+        {
+            Debug.Log("Avoiding spawning really close together");
+            shouldSpawn = false;
+        }
 
         if (withinMax && shouldSpawn)
         {
             Spawn n = new Spawn();
-            n.noteFrequency = songGenerator.PickANote();
-            n.postion = new Vector2(horizontalMax, PlaceSpawnVertically(n.noteFrequency));
-            n.gameObject = Instantiate(spawn, n.postion, spawn.transform.rotation);
+            n.noteFrequency = songGenerator.PickANote(useLevelTwoNotes);
+            n.position = new Vector2(horizontalMax, PlaceSpawnVertically(n.noteFrequency));
+            n.gameObject = Instantiate(spawn, n.position, spawn.transform.rotation);
             spawns.Add(n);
+            timeOfLastSpawn = Time.timeSinceLevelLoad;
         }
     }
 
