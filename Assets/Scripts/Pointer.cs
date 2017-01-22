@@ -12,8 +12,13 @@ public class Pointer : MonoBehaviour {
     private float centerY = 0;
     public float maxSize = 100;
 
-	// Use this for initialization
-	void Start () {
+
+    public float smoothTime = 0.3F;
+    private Vector3 velocity = Vector3.zero;
+
+
+    // Use this for initialization
+    void Start () {
       centerY = gameObject.transform.position.y;
     }
 	
@@ -32,8 +37,8 @@ public class Pointer : MonoBehaviour {
             y = Mathf.Clamp( gameObject.transform.position.y + Input.GetAxis("Vertical") * speed,  centerY - maxSize / 2, centerY + maxSize /2 );
         }
         position = new Vector3(gameObject.transform.position.x , y, gameObject.transform.position.z);
-        gameObject.transform.position = position;
-	}
+        gameObject.transform.position = Vector3.SmoothDamp(transform.position, position, ref velocity, smoothTime);
+    }
 
     private void UpdateOpacity(bool active)
     {
