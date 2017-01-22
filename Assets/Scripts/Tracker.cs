@@ -10,31 +10,42 @@ public class Tracker : MonoBehaviour
 {
     public float pitch;
     public int midiCents;
-
-    public float rmsValue;
-    public float dbValue;
-
-    public int qSamples = 1024;
-    public int binSize = 1024; // you can change this up, I originally used 8192 for better resolution, but I stuck with 1024 because it was slow-performing on the phone
-    public float refValue = 0.1f;
-    public float threshold = 0.01f;
-
-    float[] samples;
-    float[] spectrum;
-
     public Text display; // drag a Text object here to display values
+    
     public bool mute = true;
     public AudioMixer masterMixer; // drag an Audio Mixer here in the inspector
 
     string micDeviceName = null; // null = default mic
     int micSampleRate;
+    AudioClip micAudio;
 
     public PitchTracker pitchTracker;
 
     void Start()
     {
-        samples = new float[qSamples];
-        spectrum = new float[binSize];
+        //DaveStart();
+        ForumVersionStart();
+    }
+
+    void DaveVersionStart()
+    {
+
+        int minSampleRate;
+        Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out micSampleRate);
+        Debug.Log("Recording from default mic at " + micSampleRate + " Hz");
+
+        // starts the Microphone and attaches it to the AudioSource
+        micAudio = Microphone.Start(micDeviceName, true, 10, micSampleRate);
+        while (!(Microphone.GetPosition(micDeviceName) > 0)) { } // Wait until the recording has started
+
+        pitchTracker = new PitchTracker();
+        pitchTracker.SampleRate = micSampleRate;
+        pitchTracker.PitchDetected += PitchTracker_PitchDetected;
+    }
+
+    // based on https://forum.unity3d.com/threads/detecting-musical-notes-from-vocal-input.316698/
+    void ForumVersionStart()
+    {
 
         int minSampleRate;
         Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out micSampleRate);
@@ -47,12 +58,14 @@ public class Tracker : MonoBehaviour
         GetComponent<AudioSource>().Play();
 
         // Mutes the mixer. You have to expose the Volume element of your mixer for this to work. I named mine "masterVolume".
-        masterMixer.SetFloat("masterVolume", -80f);
+        // NEVER MIND ILL SET IT IN PROPERTY INSPECTOR
+        //masterMixer.SetFloat("masterVolume", -80f);
 
         pitchTracker = new PitchTracker();
         pitchTracker.SampleRate = micSampleRate;
         pitchTracker.PitchDetected += PitchTracker_PitchDetected;
     }
+   
 
     private void PitchTracker_PitchDetected(PitchTracker sender, PitchTracker.PitchRecord pitchRecord)
     {
@@ -61,17 +74,27 @@ public class Tracker : MonoBehaviour
 
     void Update()
     {
-        AnalyzeSound();
+        //DaveVersionAnalyzeSound();
+        ForumVersionAnalyzeSound();
 
         pitch = pitchTracker.CurrentPitchRecord.Pitch;
         midiCents = pitchTracker.CurrentPitchRecord.MidiCents;
     }
-    
 
-    void AnalyzeSound()
+    void DaveVersionAnalyzeSound()
     {
+        int qSamples = 2048;
         float[] samples = new float[qSamples];
-        GetComponent<AudioSource>().GetOutputData(samples, 0); // fill array with samples
+        Debug.Log("here are the samples: " + samples[0] + " " + samples[1]);
+        micAudio.GetData(samples, 0); // fill array with samples
         pitchTracker.ProcessBuffer(samples);
     }
+
+
+    void ForumVersionAnalyzeSound()
+    {
+        float[] samples = new float[2048];
+        GetComponent<AudioSource>().GetOutputData(samples, 0); // fill array with samples
+        pitchTracker.ProcessBuffer(samples);
+    } 
 }

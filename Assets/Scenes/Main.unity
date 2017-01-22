@@ -849,7 +849,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2082541793}
   - component: {fileID: 2082541792}
-  - component: {fileID: 2082541791}
   - component: {fileID: 2082541794}
   m_Layer: 0
   m_Name: Audio Source
@@ -858,17 +857,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2082541791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2082541790}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fb58b9fda75a944ba3e9ddfaa9c16c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &2082541792
 AudioSource:
   m_ObjectHideFlags: 0
@@ -877,7 +865,8 @@ AudioSource:
   m_GameObject: {fileID: 2082541790}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300001, guid: f9e327c0500adb943993d0b1d99fad30,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -975,12 +964,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitch: 0
   midiCents: 0
-  rmsValue: 0
-  dbValue: 0
-  qSamples: 1024
-  binSize: 1024
-  refValue: 0.1
-  threshold: 0.01
   display: {fileID: 0}
   mute: 1
   masterMixer: {fileID: 24100000, guid: ea3075824fc585548abc02d2ba731d6b, type: 2}
