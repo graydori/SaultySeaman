@@ -112,7 +112,7 @@ public class SpawnPitch : MonoBehaviour
     float GenerateNoteFrequency()
     {
         float f = Random.Range(verticalMin, verticalMax); // 1.5,4.5
-        Debug.Log("GenerateNoteFrequency f = " + f);
+        //Debug.Log("GenerateNoteFrequency f = " + f);
         Debug.Log("PickANote = " + songGenerator.PickANote());
         return f;
     }

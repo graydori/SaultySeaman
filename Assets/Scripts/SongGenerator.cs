@@ -69,21 +69,22 @@ public class SongGenerator
                 groupIndex = 0;
             }
 
-            int noteIndex = 1;
             float[] noteGroup = levelOneNoteGroups[groupIndex];
-            note = noteGroup[random.Next(noteGroup.Length)];
+            int noteIndex = random.Next(noteGroup.Length);
+            note = noteGroup[noteIndex];
 
             // Don't repeat notes in second group twice in a row
             if ((groupIndex == 1) && (note == previousNote) && (previousNote != 0))
             {
-                Debug.Log("avoiding repeated note" + note);
+                //Debug.Log("avoiding repeated note" + note);
                 success = false;
             }
 
-            if (success)
-            {
-                Debug.Log("Success: groupIndex = " + groupIndex + " noteIndex " + noteIndex);
-            }
+            //if (success)
+            //{
+            //   Debug.Log("Success: groupIndex = " + groupIndex + " noteIndex " + noteIndex);
+            //}
+
         } while (!success);
 
         previousNote = note;
