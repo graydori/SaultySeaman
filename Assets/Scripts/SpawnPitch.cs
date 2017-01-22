@@ -48,30 +48,39 @@ public class SpawnPitch : MonoBehaviour
         List<Spawn> removeMe = new List<Spawn>();
         foreach (Spawn n in spawns)
         {
-            float distance = horizontalMax - pointer.transform.position.x;
-            float calculatedDistance = (Time.deltaTime / speed) * distance;
-            n.gameObject.transform.position -= new Vector3(calculatedDistance, 0);
+            if (!n.hit)
+            {
+                float distance = horizontalMax - pointer.transform.position.x;
+                float calculatedDistance = (Time.deltaTime / speed) * distance;
+                n.gameObject.transform.position -= new Vector3(calculatedDistance, 0);
 
-            //do we match position with the pointer?
-            var localPositionB = n.gameObject.transform.InverseTransformPoint(pointer.transform.position);
-            if (!n.hit) {
+                //do we match position with the pointer?
+                var localPositionB = n.gameObject.transform.InverseTransformPoint(pointer.transform.position);
+            
                 bool hitX = Mathf.Abs(n.gameObject.transform.position.x - pointer.transform.position.x) < horizontalEasy;
                 bool hitY = Mathf.Abs(n.gameObject.transform.position.y - pointer.transform.position.y) < verticalEasy;
                 if (pointer.isActive && hitX && hitY)
                 {
                     //success!
                     n.hit = true;
-                    n.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+                    pointer.GetComponent<Animator>().SetTrigger("Hit");
+                    n.gameObject.GetComponent<Animator>().SetBool("Dead", true);
+                    //n.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+                    success++;
                 }
             }
-
-                //cleanup this game object
-            if (n.gameObject.transform.position.x < pointer.transform.position.x && n.hit)
+            else
             {
-                success++;
-                Destroy(n.gameObject);
-                removeMe.Add(n);
+                //start animating down fall
+                n.gameObject.transform.position += new Vector3(0, -.3f);
+               
+                if (n.gameObject.transform.position.y < -7)
+                {
+                    Destroy(n.gameObject);
+                    removeMe.Add(n);
+                }
             }
+            
             if (n.gameObject.transform.position.x < horizontalMin)
             {
                 misses++;
@@ -106,7 +115,7 @@ public class SpawnPitch : MonoBehaviour
         {
             Spawn n = new Spawn();
             n.postion = new Vector2(horizontalMax, Random.Range(verticalMin, verticalMax));
-            n.gameObject = Instantiate(spawn, n.postion, Quaternion.identity);
+            n.gameObject = Instantiate(spawn, n.postion, spawn.transform.rotation);
             spawns.Add(n);
         }
     }

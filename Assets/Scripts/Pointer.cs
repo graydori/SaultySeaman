@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pointer : MonoBehaviour {
+public class Pointer : MonoBehaviour
+{
 
     public bool fake = false;
     public float speed = 1;
@@ -20,12 +21,15 @@ public class Pointer : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-      centerY = gameObject.transform.position.y;
+    void Start()
+    {
+        centerY = gameObject.transform.position.y;
+        isActive = fake;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         float y;
         if (!fake)
         {
@@ -34,18 +38,20 @@ public class Pointer : MonoBehaviour {
             y -= maxSize / 2;
             y += centerY;
             isActive = tracker.pitch != 0;
-           
+
             UpdateOpacity();
 
-        } else {
-            y = Mathf.Clamp( gameObject.transform.position.y + Input.GetAxis("Vertical") * speed,  centerY - maxSize / 2, centerY + maxSize /2 );
         }
-        position = new Vector3(gameObject.transform.position.x , y, gameObject.transform.position.z);
+        else
+        {
+            y = Mathf.Clamp(gameObject.transform.position.y + Input.GetAxis("Vertical") * speed, centerY - maxSize / 2, centerY + maxSize / 2);
+        }
+        position = new Vector3(gameObject.transform.position.x, y, gameObject.transform.position.z);
         gameObject.transform.position = Vector3.SmoothDamp(transform.position, position, ref velocity, smoothTime);
     }
 
     private void UpdateOpacity()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, isActive ? 1f: 0.5f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, isActive ? 1f : 0.5f);
     }
 }
