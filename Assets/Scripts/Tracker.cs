@@ -21,11 +21,13 @@ public class Tracker : MonoBehaviour
 
     float[] samples;
     float[] spectrum;
-    int samplerate;
 
     public Text display; // drag a Text object here to display values
     public bool mute = true;
     public AudioMixer masterMixer; // drag an Audio Mixer here in the inspector
+
+    string micDeviceName = null; // null = default mic
+    int micSampleRate;
 
     public PitchTracker pitchTracker;
 
@@ -33,10 +35,13 @@ public class Tracker : MonoBehaviour
     {
         samples = new float[qSamples];
         spectrum = new float[binSize];
-        samplerate = AudioSettings.outputSampleRate;
+
+        int minSampleRate;
+        Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out micSampleRate);
+        Debug.Log("Recording from default mic at " + micSampleRate + " Hz");
 
         // starts the Microphone and attaches it to the AudioSource
-        GetComponent<AudioSource>().clip = Microphone.Start(null, true, 10, samplerate);
+        GetComponent<AudioSource>().clip = Microphone.Start(micDeviceName, true, 10, micSampleRate);
         GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
         while (!(Microphone.GetPosition(null) > 0)) { } // Wait until the recording has started
         GetComponent<AudioSource>().Play();
@@ -45,7 +50,7 @@ public class Tracker : MonoBehaviour
         masterMixer.SetFloat("masterVolume", -80f);
 
         pitchTracker = new PitchTracker();
-        pitchTracker.SampleRate = samplerate;
+        pitchTracker.SampleRate = micSampleRate;
         pitchTracker.PitchDetected += PitchTracker_PitchDetected;
     }
 
