@@ -119,8 +119,11 @@ public class SpawnPitch : MonoBehaviour
     {
         if (display != null)
         {
-            // no time to set the number properly. should match Success Max in inspector for  positionOnSuccess.successMax;
-            display.text = "Sailors seduced : " + string.Format("{0:F1}", (float) UserState.success / 4) + " of 3"; 
+            // no time to set the number of birds per sailor properly. should match Success Max in inspector for  positionOnSuccess.successMax, that's the
+            // thing which triggers the transition to the next level when you finish;
+            // successmax = 24 => use / 8, of 3 . also the number of birds that need to be hit to take out a pirate 
+            // also needs to be set in UpdateOnSuccess.Success for Ship/Pirate1,2,Duchess. 
+            display.text = "Sailors seduced : " + string.Format("{0:F1}", (float) UserState.success / 8) + " of 3"; 
         }
     }
      

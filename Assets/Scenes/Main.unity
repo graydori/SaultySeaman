@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdb81257ede27c4aa64dab135fb9cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  success: 8
+  success: 16
   delay: 100
 --- !u!82 &767945847
 AudioSource:
@@ -704,7 +704,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -764,7 +764,7 @@ Prefab:
     - target: {fileID: 114056483765917030, guid: 90c72f4e4a1494d4683d013fe06d4873,
         type: 2}
       propertyPath: fake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114056483765917030, guid: 90c72f4e4a1494d4683d013fe06d4873,
         type: 2}
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdb81257ede27c4aa64dab135fb9cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  success: 12
+  success: 24
   delay: 0
 --- !u!82 &958341168
 AudioSource:
@@ -949,7 +949,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1277,8 +1277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animate: {fileID: 958341164}
-  successMin: 8
-  successMax: 12
+  successMin: 16
+  successMax: 24
   position1: {x: -6, y: -1.4, z: 0}
   position2: {x: 4, y: -1.4, z: 0}
   smoothTime: 1
@@ -1611,7 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdb81257ede27c4aa64dab135fb9cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  success: 4
+  success: 8
   delay: 44100
 --- !u!82 &2058902858
 AudioSource:
@@ -1861,7 +1861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131b121123ea04d4f8ba895bb0df45c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  successMax: 12
+  successMax: 24
   dest: 0
   smoothTime: 0.3
 --- !u!212 &2140772548
