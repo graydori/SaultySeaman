@@ -9,15 +9,18 @@ public class Pointer : MonoBehaviour
     public float speed = 1;
     public Vector3 position;
     public Tracker tracker;
-    public float maxPitch = 150;
     private float centerY = 0;
     public float maxSize = 100;
+    public float maxPitch = 700;
+    public float pointerPitch = 0;
 
     public bool isActive = false;
 
 
     public float smoothTime = 0.3F;
     private Vector3 velocity = Vector3.zero;
+
+    private int framesForWhichNoPitchDetected = 0;
 
 
     // Use this for initialization
@@ -28,16 +31,31 @@ public class Pointer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float y;
         if (!fake)
         {
-            y = tracker.pitch / maxPitch;
-            y *= maxSize;
-            y -= maxSize / 2;
-            y += centerY;
-            isActive = tracker.pitch != 0;
+            float p = tracker.pitch;
+            if (p != 0)
+            {
+                pointerPitch = p;
+                framesForWhichNoPitchDetected = 0;
+            }
+            else
+            {
+                framesForWhichNoPitchDetected++;
+
+                float waitThisManySecondsBeforeSettingVoiceInactive = 0.2f;
+                if (framesForWhichNoPitchDetected * Time.fixedDeltaTime > waitThisManySecondsBeforeSettingVoiceInactive)
+                {
+                    pointerPitch = 0;
+                }
+            }            
+            
+            y = MapPitchToYAxis(pointerPitch);
+
+            isActive = pointerPitch != 0;
 
             UpdateOpacity();
 
@@ -50,8 +68,18 @@ public class Pointer : MonoBehaviour
         gameObject.transform.position = Vector3.SmoothDamp(transform.position, position, ref velocity, smoothTime);
     }
 
+    public float MapPitchToYAxis(float pitch)
+    {
+        float y;
+        y = pitch / maxPitch;
+        y *= maxSize;
+        y -= maxSize / 2;
+        y += centerY;
+        return y;
+    }
+
     private void UpdateOpacity()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, isActive ? 1f : 0.5f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, isActive ? 1f : 0.2f);
     }
 }

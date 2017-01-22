@@ -11,6 +11,7 @@ public class SpawnPitch : MonoBehaviour
         public GameObject gameObject;
         public Vector2 postion;
         public bool hit;
+        public float noteFrequency;
     }
 
     public Pointer pointer;
@@ -109,11 +110,11 @@ public class SpawnPitch : MonoBehaviour
         }
     }
      
-    float GenerateNoteFrequency()
+    float PlaceSpawnVertically(float noteFrequency)
     {
-        float f = Random.Range(verticalMin, verticalMax); // 1.5,4.5
-        //Debug.Log("GenerateNoteFrequency f = " + f);
-        Debug.Log("PickANote = " + songGenerator.PickANote());
+        Debug.Log("PlaceSpawnVertically noteFrequency = " + noteFrequency);
+
+        float f = Random.Range(verticalMin, verticalMax); // 1.5,4.5        
         return f;
     }
     void PerformSpawn()
@@ -125,7 +126,8 @@ public class SpawnPitch : MonoBehaviour
         if (withinMax && shouldSpawn)
         {
             Spawn n = new Spawn();
-            n.postion = new Vector2(horizontalMax, GenerateNoteFrequency());
+            n.noteFrequency = songGenerator.PickANote();
+            n.postion = new Vector2(horizontalMax, PlaceSpawnVertically(n.noteFrequency));
             n.gameObject = Instantiate(spawn, n.postion, spawn.transform.rotation);
             spawns.Add(n);
         }
