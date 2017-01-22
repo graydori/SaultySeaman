@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SpawnPitch : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class SpawnPitch : MonoBehaviour
         public bool hit;
     }
 
-    public GameObject pointer;
+    public Pointer pointer;
     public GameObject spawn;
 
     public int maxCount = 20;
@@ -34,13 +35,15 @@ public class SpawnPitch : MonoBehaviour
     public int misses = 0;
 
     private List<Spawn> spawns;
+    public Text display;
 
     void Start()
     {
         spawns = new List<Spawn>();
+        UpdateDisplay();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         List<Spawn> removeMe = new List<Spawn>();
         foreach (Spawn n in spawns)
@@ -54,7 +57,7 @@ public class SpawnPitch : MonoBehaviour
             if (!n.hit) {
                 bool hitX = Mathf.Abs(n.gameObject.transform.position.x - pointer.transform.position.x) < horizontalEasy;
                 bool hitY = Mathf.Abs(n.gameObject.transform.position.y - pointer.transform.position.y) < verticalEasy;
-                if (hitX && hitY)
+                if (pointer.isActive && hitX && hitY)
                 {
                     //success!
                     n.hit = true;
@@ -75,11 +78,22 @@ public class SpawnPitch : MonoBehaviour
                 Destroy(n.gameObject);
                 removeMe.Add(n);
             }
-
         }
-
-        foreach (Spawn n in removeMe) spawns.Remove(n);
+        if (removeMe.Count > 0)
+        {
+            UpdateDisplay();
+            foreach (Spawn n in removeMe) spawns.Remove(n);
+        }
         PerformSpawn();
+    }
+
+    private void UpdateDisplay()
+    {
+        if (display != null)
+        {
+            display.text = "Notes Hit: " + success + "\n" +
+                "Missed: " + misses;
+        }
     }
 
     void PerformSpawn()

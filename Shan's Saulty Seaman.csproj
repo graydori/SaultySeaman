@@ -81,7 +81,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\OtherTracker.cs" />
     <Compile Include="Assets\Scripts\Pitch\CircularBuffer.cs" />
     <Compile Include="Assets\Scripts\Pitch\Extensions.cs" />
     <Compile Include="Assets\Scripts\Pitch\IIRFilter.cs" />

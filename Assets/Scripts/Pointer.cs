@@ -12,6 +12,8 @@ public class Pointer : MonoBehaviour {
     private float centerY = 0;
     public float maxSize = 100;
 
+    public bool isActive = false;
+
 
     public float smoothTime = 0.3F;
     private Vector3 velocity = Vector3.zero;
@@ -31,7 +33,9 @@ public class Pointer : MonoBehaviour {
             y *= maxSize;
             y -= maxSize / 2;
             y += centerY;
-            UpdateOpacity(tracker.pitch != 0);
+            isActive = tracker.pitch != 0;
+           
+            UpdateOpacity();
 
         } else {
             y = Mathf.Clamp( gameObject.transform.position.y + Input.GetAxis("Vertical") * speed,  centerY - maxSize / 2, centerY + maxSize /2 );
@@ -40,8 +44,8 @@ public class Pointer : MonoBehaviour {
         gameObject.transform.position = Vector3.SmoothDamp(transform.position, position, ref velocity, smoothTime);
     }
 
-    private void UpdateOpacity(bool active)
+    private void UpdateOpacity()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, active? 1f: 0.5f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, isActive ? 1f: 0.5f);
     }
 }

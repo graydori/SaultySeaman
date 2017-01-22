@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShipRotator : MonoBehaviour {
 
+    public float _UpDown;
     public float _Angle;
     public float _Period;
 
@@ -14,5 +15,6 @@ public class ShipRotator : MonoBehaviour {
         _Time = _Time + Time.deltaTime;
         float phase = Mathf.Sin(_Time / _Period);
         transform.localRotation = Quaternion.Euler(new Vector3(0, 0, phase * _Angle));
+        transform.position += new Vector3(0, phase * _UpDown);
     }
 }
