@@ -120,7 +120,7 @@ public class SpawnPitch : MonoBehaviour
         if (display != null)
         {
             // no time to set the number properly. should match Success Max in inspector for  positionOnSuccess.successMax;
-            display.text = "Sailors seduced : " + UserState.success / 4 + " of 12"; 
+            display.text = "Sailors seduced : " + string.Format("{0:F1}", (float) UserState.success / 4) + " of 3"; 
         }
     }
      
