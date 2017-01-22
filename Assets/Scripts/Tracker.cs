@@ -26,35 +26,18 @@ public class Tracker : MonoBehaviour
         //DaveStart();
         ForumVersionStart();
     }
-
-    void DaveVersionStart()
-    {
-
-        int minSampleRate;
-        Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out micSampleRate);
-        Debug.Log("Recording from default mic at " + micSampleRate + " Hz");
-
-        // starts the Microphone and attaches it to the AudioSource
-        micAudio = Microphone.Start(micDeviceName, true, 10, micSampleRate);
-        while (!(Microphone.GetPosition(micDeviceName) > 0)) { } // Wait until the recording has started
-
-        pitchTracker = new PitchTracker();
-        pitchTracker.SampleRate = micSampleRate;
-        pitchTracker.PitchDetected += PitchTracker_PitchDetected;
-    }
-
+    
     // based on https://forum.unity3d.com/threads/detecting-musical-notes-from-vocal-input.316698/
     void ForumVersionStart()
     {
 
         int minSampleRate, maxSampleRate;
         Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out maxSampleRate);
-        Debug.Log("Recording from default mic at " + minSampleRate + " Hz");
         Debug.Log("Minimum sample rate was: " + minSampleRate + " Hz");
         Debug.Log("Maximum sample rate was: " + maxSampleRate + " Hz");
-
+        micSampleRate = minSampleRate;
         // starts the Microphone and attaches it to the AudioSource
-        GetComponent<AudioSource>().clip = Microphone.Start(micDeviceName, true, 10, micSampleRate);
+        GetComponent<AudioSource>().clip = Microphone.Start(micDeviceName, true, 10, minSampleRate);
         GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
         while (!(Microphone.GetPosition(null) > 0)) { } // Wait until the recording has started
         GetComponent<AudioSource>().Play();
