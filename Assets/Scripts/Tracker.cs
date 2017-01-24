@@ -23,13 +23,16 @@ public class Tracker : MonoBehaviour
 
     void Start()
     {
-        //DaveStart();
         ForumVersionStart();
     }
     
     // based on https://forum.unity3d.com/threads/detecting-musical-notes-from-vocal-input.316698/
     void ForumVersionStart()
     {
+        if (Microphone.devices.Length == 0)
+        {
+            return;
+        }
 
         int minSampleRate, maxSampleRate;
         Microphone.GetDeviceCaps(micDeviceName, out minSampleRate, out maxSampleRate);
@@ -59,23 +62,20 @@ public class Tracker : MonoBehaviour
 
     void Update()
     {
-        //DaveVersionAnalyzeSound();
+        if (Microphone.devices.Length == 0)
+        {
+            return;
+        }
+
         ForumVersionAnalyzeSound();
 
         pitch = pitchTracker.CurrentPitchRecord.Pitch;
         midiCents = pitchTracker.CurrentPitchRecord.MidiCents;
     }
-
-    void DaveVersionAnalyzeSound()
-    {
-        int qSamples = 2048;
-        float[] samples = new float[qSamples];
-        Debug.Log("here are the samples: " + samples[0] + " " + samples[1]);
-        micAudio.GetData(samples, 0); // fill array with samples
-        pitchTracker.ProcessBuffer(samples);
-    }
-
-
+     
+    // Feeds the mic audio through an audio output so we can use GetOutputData.
+    // I couldn't get things to work without this bullshit.
+    // Therefore we manually made the mixer set audio output level = 0 so people don't hear themselves. 
     void ForumVersionAnalyzeSound()
     {
         float[] samples = new float[2048];

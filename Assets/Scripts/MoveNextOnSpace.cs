@@ -11,7 +11,7 @@ public class MoveNextOnSpace : MonoBehaviour {
         if (Application.loadedLevel < 2)
             Application.LoadLevel(Application.loadedLevel + 1);
         else
-            Application.LoadLevel(0);
+            Application.LoadLevel(1);
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class MoveNextOnSpace : MonoBehaviour {
             Application.Quit();
         }
         
-        if (Track != null && Track.pitch > 0 || Track == null && Input.GetKeyDown(KeyCode.Space)) MoveNext();
+        if (/*Track != null && Track.pitch > 0 || Track == null && */ Input.GetKeyDown(KeyCode.Space)) MoveNext();
 
 
     }

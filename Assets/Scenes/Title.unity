@@ -1021,7 +1021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SING TO START
+  m_Text: SPACEBAR TO START
 --- !u!222 &821091645
 CanvasRenderer:
   m_ObjectHideFlags: 0

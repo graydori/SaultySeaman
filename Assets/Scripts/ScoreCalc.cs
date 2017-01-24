@@ -11,7 +11,7 @@ public class ScoreCalc : MonoBehaviour {
         float score = 40f;
         if (total > 0) score = (float)UserState.success / total * 100;
         
-        GetComponent<Text>().text = "seduction score: " + Mathf.Round( score ) + "% \n\n SING TO REPLAY";
+        GetComponent<Text>().text = "seduction score: " + Mathf.Round( score ) + "% \n\n SPACEBAR TO REPLAY";
 	}
 	
 	// Update is called once per frame

@@ -2,9 +2,11 @@
 Library/
 Temp/
 obj/
+MacBuild*
 SaltySeamen_Data
 SaltySeamen.exe
 SaltySeamen.zip
+SaltySeamenMac*
 
 # Windows image file caches
 Thumbs.db
