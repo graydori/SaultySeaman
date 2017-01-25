@@ -47,6 +47,7 @@ public class SpawnPitch : MonoBehaviour
 
     private List<Spawn> spawns;
     public Text display;
+    public Text instructionsDisplay;
 
     // Pitch related stuff
     public float verticalMin = 1.5f;
@@ -115,15 +116,38 @@ public class SpawnPitch : MonoBehaviour
         PerformSpawn();
     }
 
+        // during jam, no time to set the number of birds per sailor properly so instead hacked it here. should match Success Max in inspector for  positionOnSuccess.successMax, that's the
+        // thing which triggers the transition to the next level when you finish;
+        // successmax = 24 => use / 8, of 3 . also the number of birds that need to be hit to take out a pirate 
+        // also needs to be set in UpdateOnSuccess.Success for Ship/Pirate1,2,Duchess. 
+    private float Score()    {        return (float) UserState.success / 8; }
+    private int NumberOfSailors() { return 3; }
+
     private void UpdateDisplay()
     {
+        if (instructionsDisplay != null)
+        {
+            if (Time.timeSinceLevelLoad > 7 && Score() < 0.3)
+            {
+                instructionsDisplay.text = "Use your singing pitch (the shell) to hit the notes (the birds)\n";
+            }
+            else
+            {
+                instructionsDisplay.text = "";
+            }
+
+            if (Microphone.devices.Length == 0)
+            {
+                pointer.fake = true;
+                
+                instructionsDisplay.text += "\nNO MICROPHONE HUH? YOU CAN USE THE ARROW KEYS            ";
+            }
+
+        }
+
         if (display != null)
         {
-            // no time to set the number of birds per sailor properly. should match Success Max in inspector for  positionOnSuccess.successMax, that's the
-            // thing which triggers the transition to the next level when you finish;
-            // successmax = 24 => use / 8, of 3 . also the number of birds that need to be hit to take out a pirate 
-            // also needs to be set in UpdateOnSuccess.Success for Ship/Pirate1,2,Duchess. 
-            display.text = "Sailors seduced : " + string.Format("{0:F1}", (float) UserState.success / 8) + " of 3"; 
+            display.text = "Sailors seduced : " + string.Format("{0:F1}", Score())  + " of " + NumberOfSailors(); 
         }
     }
      
@@ -141,6 +165,13 @@ public class SpawnPitch : MonoBehaviour
         float randomNumber = Random.Range(0f, 1f);
         
         bool shouldSpawn = randomNumber < frequencyOfSpawn;
+
+        if (Time.timeSinceLevelLoad < 2.3)
+        {
+            // give people some time to read the instructions
+            shouldSpawn = false;
+        }
+            
 
         if ((Time.timeSinceLevelLoad - timeOfLastSpawn) < 0.1)
         {
