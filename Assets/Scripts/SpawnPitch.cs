@@ -29,6 +29,9 @@ public class SpawnPitch : MonoBehaviour
     public GameObject spawn;
     public bool useLevelTwoNotes;
 
+    public AudioSource forGodsSakeSing;
+    bool forGodsSakeSingPlayed = false;
+
     public int maxCount = 20;
 
     public float horizontalMax = 14f;
@@ -127,7 +130,17 @@ public class SpawnPitch : MonoBehaviour
     {
         if (instructionsDisplay != null)
         {
-            if (Time.timeSinceLevelLoad > 7 && Score() < 0.3)
+
+            if (Time.timeSinceLevelLoad > 8 && Score() < 0.2)
+            {
+                if (!forGodsSakeSingPlayed)
+                {
+                    forGodsSakeSing.Play();
+                    forGodsSakeSingPlayed = true;
+                }
+            }
+
+            if (Time.timeSinceLevelLoad > 8 && Score() < 0.2)
             {
                 instructionsDisplay.text = "Use your singing pitch (the shell) to hit the notes (the birds)\n";
             }
