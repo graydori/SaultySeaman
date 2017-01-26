@@ -21,6 +21,7 @@ public class PositionOnSuccess : MonoBehaviour {
     // Update is called once per frame
  
 	void Update () {
+        // This was intended to cause the blood to rise up when user cleared the level
         if (UserState.success < successMax)
         {
             float amountOfSuccess = (float)UserState.success / successMax;
@@ -37,7 +38,7 @@ public class PositionOnSuccess : MonoBehaviour {
 
     IEnumerator MoveNext()
     {
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(2);
         Application.LoadLevel(Application.loadedLevel + 1);
     }
 }

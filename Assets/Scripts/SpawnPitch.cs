@@ -31,6 +31,9 @@ public class SpawnPitch : MonoBehaviour
 
     public AudioSource forGodsSakeSing;
     bool forGodsSakeSingPlayed = false;
+    public AudioSource successNoise;
+    bool successNoisePlayed = false;
+    private int countDownFramesTillSuccessNoisePlays = 10;
 
     public int maxCount = 20;
 
@@ -117,6 +120,16 @@ public class SpawnPitch : MonoBehaviour
             foreach (Spawn n in removeMe) spawns.Remove(n);
         }
         PerformSpawn();
+
+
+        if (UserState.success >= 24) // ASSUMES successmax=24 for positionOnSuccess
+        {
+            if (!successNoisePlayed && (--countDownFramesTillSuccessNoisePlays == 0))
+            {
+                successNoise.Play();
+                successNoisePlayed = true;
+            }
+        }
     }
 
         // during jam, no time to set the number of birds per sailor properly so instead hacked it here. should match Success Max in inspector for  positionOnSuccess.successMax, that's the
