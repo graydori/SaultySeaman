@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8ed29419876f544a471d2656dab6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreDescription: Sailors seduced
   pointer: {fileID: 933378257}
   spawnPrefabs:
   - {fileID: 1480254456650234, guid: e33aafb5750a97347abdce605096e3f2, type: 2}
