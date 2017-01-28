@@ -25,8 +25,11 @@ public class SpawnPitch : MonoBehaviour
         public float noteFrequency;
     }
 
+    public string scoreDescription;
+
     public Pointer pointer;
-    public GameObject spawn;
+    public GameObject[] spawnPrefabs;
+    public bool rotateSpawnRandomly;
     public bool useLevelTwoNotes;
 
     public AudioSource forGodsSakeSing;
@@ -173,7 +176,7 @@ public class SpawnPitch : MonoBehaviour
 
         if (display != null)
         {
-            display.text = "Sailors seduced : " + string.Format("{0:F1}", Score())  + " of " + NumberOfSailors(); 
+            display.text = scoreDescription + " : " + string.Format("{0:F1}", Score())  + " of " + NumberOfSailors(); 
         }
     }
      
@@ -210,7 +213,22 @@ public class SpawnPitch : MonoBehaviour
             Spawn n = new Spawn();
             n.noteFrequency = songGenerator.PickANote(useLevelTwoNotes);
             n.position = new Vector2(horizontalMax, PlaceSpawnVertically(n.noteFrequency));
-            n.gameObject = Instantiate(spawn, n.position, spawn.transform.rotation);
+            GameObject spawnPrefab = spawnPrefabs[Random.Range(0, spawnPrefabs.Length)];
+
+            Quaternion rotation;
+            if (rotateSpawnRandomly)
+            {
+                // rotation = Random.rotation; 
+                //rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(-10, 10), Random.Range(-10, 10));
+                rotation = Quaternion.Euler(Random.Range(-30,30), Random.Range(-30,30), Random.Range(0, 360));
+
+            }
+            else
+            {
+                rotation = spawnPrefab.transform.rotation;
+            }
+
+            n.gameObject = Instantiate(spawnPrefab, n.position, rotation);
             spawns.Add(n);
             timeOfLastSpawn = Time.timeSinceLevelLoad;
         }
