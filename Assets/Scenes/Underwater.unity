@@ -869,6 +869,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 538b1a0108c22c14d94b964c925913ea, type: 2}
+    - target: {fileID: 1769358389784012, guid: 90c72f4e4a1494d4683d013fe06d4873, type: 2}
+      propertyPath: m_Name
+      value: Piranha
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90c72f4e4a1494d4683d013fe06d4873, type: 2}
   m_IsPrefabParent: 0

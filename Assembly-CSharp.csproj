@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\DelayedPlay.cs" />
      <Compile Include="Assets\Scripts\FlashingTextScript.cs" />
+     <Compile Include="Assets\Scripts\MoveNextAfterPause.cs" />
      <Compile Include="Assets\Scripts\MoveNextOnSpace.cs" />
      <Compile Include="Assets\Scripts\Pitch\CircularBuffer.cs" />
      <Compile Include="Assets\Scripts\Pitch\Extensions.cs" />

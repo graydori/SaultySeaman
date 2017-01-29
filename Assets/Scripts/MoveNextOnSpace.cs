@@ -8,10 +8,10 @@ public class MoveNextOnSpace : MonoBehaviour {
 
     private void MoveNext()
     {
-        if (Application.loadedLevel < 2)
+        if (Application.loadedLevel < 4)
             Application.LoadLevel(Application.loadedLevel + 1);
         else
-            Application.LoadLevel(1);
+            Application.LoadLevel(2);
     }
 
     // Update is called once per frame
