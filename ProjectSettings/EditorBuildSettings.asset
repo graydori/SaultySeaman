@@ -12,6 +12,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
   - enabled: 1
+    path: Assets/Scenes/Success.unity
+  - enabled: 1
     path: Assets/Scenes/Underwater.unity
   - enabled: 1
-    path: Assets/Scenes/Success.unity
+    path: Assets/Scenes/SuccessAfterUnderwater.unity

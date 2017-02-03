@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2466b6403e4514fb77b3305e4db29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  continueText: SPACEBAR FOR NEXT LEVEL
+  continueText: SPACEBAR TO REPLAY
 --- !u!1 &1623429212
 GameObject:
   m_ObjectHideFlags: 0

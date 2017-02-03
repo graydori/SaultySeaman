@@ -8,7 +8,7 @@ public class MoveNextOnSpace : MonoBehaviour {
 
     private void MoveNext()
     {
-        if (Application.loadedLevel < 4)
+        if (Application.loadedLevel < 5)
             Application.LoadLevel(Application.loadedLevel + 1);
         else
             Application.LoadLevel(2);
