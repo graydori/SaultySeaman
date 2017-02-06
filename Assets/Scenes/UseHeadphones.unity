@@ -363,4 +363,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effd3812005ddd945a0bd20bd5dbce26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseInSeconds: 5
+  pauseInSeconds: 4
