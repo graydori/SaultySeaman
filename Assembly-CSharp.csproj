@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\PositionOnSuccess.cs" />
      <Compile Include="Assets\Scripts\ScoreCalc.cs" />
      <Compile Include="Assets\Scripts\ShipRotator.cs" />
+     <Compile Include="Assets\Scripts\ShowCorrectMerman.cs" />
      <Compile Include="Assets\Scripts\SongGenerator.cs" />
      <Compile Include="Assets\Scripts\SpawnPitch.cs" />
      <Compile Include="Assets\Scripts\Tracker.cs" />
