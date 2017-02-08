@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CrabWalker.cs" />
      <Compile Include="Assets\Scripts\DelayedPlay.cs" />
      <Compile Include="Assets\Scripts\FlashingTextScript.cs" />
      <Compile Include="Assets\Scripts\MoveNextAfterPause.cs" />
